@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happy Birthday Nida 🎉</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      overflow: hidden;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb);
+      background-size: 400% 400%;
+      animation: bg 10s infinite alternate;
+    }
+
+    @keyframes bg {
+      0% {background-position: left;}
+      100% {background-position: right;}
+    }
+
+    /* LOCK SCREEN */
+    #lock {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #ff4d6d;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* BOOK */
+    .page {
+      display: none;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      color: white;
+      animation: fade 1s;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    @keyframes fade {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* BOOK COVER STYLE */
+    .book {
+      border: 4px solid white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px black;
+      background: rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 40px;
+      text-shadow: 2px 2px 10px black;
+    }
+
+    p {
+      max-width: 600px;
+      line-height: 1.8;
+      font-size: 18px;
+    }
+
+    /* FLOWERS */
+    .flower {
+      position: absolute;
+      font-size: 18px;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      from {transform: translateY(100vh);}
+      to {transform: translateY(-10vh);}
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a6b1b2.mp3?filename=happy-birthday-to-you-piano-version-11290.mp3">
+</audio>
+
+<!-- 🔐 LOCK -->
+<div id="lock">
+  <h2>Enter Password 🔐</h2>
+  <p>Hint: her name</p>
+  <input id="pass" type="password">
+  <button onclick="check()">Unlock</button>
+</div>
+
+<!-- PAGE 1 - BOOK COVER -->
+<div class="page active" id="p1">
+  <div class="book">
+    <h1>📖 07/07/2011</h1>
+    <h2>Dear Nida 💖</h2>
+    <p>Tap to open your birthday book 🎂</p>
+    <button onclick="next(2)">Open Book</button>
+  </div>
+</div>
+
+<!-- PAGE 2 - FLOWER WISH PAGE -->
+<div class="page" id="p2">
+  <h1>🌸 Birthday Wishes 🌸</h1>
+  <p>
+    Happy Birthday Nida 🎉<br>
+    You are a beautiful soul 💖<br>
+    Your smile is priceless 😊<br>
+    You bring happiness everywhere ✨<br>
+    Stay strong always 💪<br>
+    Never lose your confidence 🌟<br>
+    May all dreams come true 🌈<br>
+    You are truly special 💕
+  </p>
+  <button onclick="next(1)">Back</button>
+  <button onclick="next(3)">Next</button>
+</div>
+
+<!-- PAGE 3 - SURPRISE -->
+<div class="page" id="p3">
+  <h1>🎁 Surprise Page</h1>
+  <p>
+    Every page of this book is made just for you 💖<br>
+    I hope you feel happy reading this 😊
+  </p>
+  <button onclick="next(2)">Back</button>
+  <button onclick="next(4)">Next</button>
+</div>
+
+<!-- PAGE 4 - IMPORTANCE -->
+<div class="page" id="p4">
+  <h1>💌 You Matter</h1>
+  <p>
+    You are really important in my life ❤️<br>
+    Talking to you always makes my day better 🌸<br>
+    You are someone I truly respect and care about 💖
+  </p>
+  <button onclick="next(3)">Back</button>
+  <button onclick="next(5)">Next</button>
+</div>
+
+<!-- PAGE 5 - FINAL -->
+<div class="page" id="p5">
+  <h1>🎊 The End 🎊</h1>
+  <p>
+    Happy Birthday Nida 🎉<br>
+    May your life always stay full of happiness 🌸<br>
+    Stay blessed and keep smiling always 💖
+  </p>
+  <button onclick="next(4)">Back</button>
+</div>
+
+<script>
+
+/* LOCK */
+function check(){
+  let p = document.getElementById("pass").value.toLowerCase();
+  if(p === "nida"){
+    document.getElementById("lock").style.display = "none";
+  } else {
+    alert("Wrong password 😅");
+  }
+}
+
+/* PAGES */
+function next(n){
+  for(let i=1;i<=5;i++){
+    document.getElementById("p"+i).classList.remove("active");
+  }
+  document.getElementById("p"+n).classList.add("active");
+}
+
+/* FLOWERS */
+setInterval(() => {
+  let f = document.createElement("div");
+  f.classList.add("flower");
+  f.innerHTML = "🌸";
+  f.style.left = Math.random()*100 + "vw";
+  f.style.fontSize = (10 + Math.random()*20) + "px";
+  document.body.appendChild(f);
+  setTimeout(() => f.remove(), 6000);
+}, 300);
+
+</script>
+
+</body>
+</html>
